@@ -2,6 +2,7 @@
 using BulkyWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BulkyWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230416163738_modelEntityAndDataSeed")]
+    partial class modelEntityAndDataSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,55 +54,55 @@ namespace BulkyWeb.Migrations
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "Comedy"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 3,
-                            Name = "Drama"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 4,
                             DisplayOrder = 4,
-                            Name = "Fantasy"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 5,
                             DisplayOrder = 5,
-                            Name = "Horror"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 6,
                             DisplayOrder = 6,
-                            Name = "Mystery"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 7,
                             DisplayOrder = 7,
-                            Name = "Romance"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 8,
                             DisplayOrder = 8,
-                            Name = "Thriller"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 9,
                             DisplayOrder = 9,
-                            Name = "Western"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 10,
                             DisplayOrder = 10,
-                            Name = "Disaster"
+                            Name = "Action"
                         });
                 });
 #pragma warning restore 612, 618
