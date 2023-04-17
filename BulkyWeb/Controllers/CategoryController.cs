@@ -26,6 +26,31 @@ namespace BulkyWeb.Controllers
 
             return View(categoriesList);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                //Custom Validation
+                if (category.Name.Equals(category.DisplayOrder.ToString(), StringComparison.Ordinal))
+                {
+                    ModelState.AddModelError("name", "The Category name must be different from Display order");
+                }
+
+                //Add and save to db
+                _dbContext.Categories.Add(category);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }
 
