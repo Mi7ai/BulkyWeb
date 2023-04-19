@@ -38,7 +38,7 @@ namespace BulkyWeb.Controllers
             if (ModelState.IsValid)
             {
                 //Custom Validation
-                if (category.Name.Equals(category.DisplayOrder.ToString(), StringComparison.Ordinal))
+                if (category.Name != null && category.Name.Equals(category.DisplayOrder.ToString(), StringComparison.Ordinal))
                 {
                     ModelState.AddModelError("name", "The Category name must be different from Display order");
                 }
@@ -50,6 +50,35 @@ namespace BulkyWeb.Controllers
             }
 
             return View();
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _dbContext.Categories.FirstOrDefault(i => i.Id == id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                //Auto updates the fields based on the id of the category parameter
+                _dbContext.Update(category);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+                return View();
         }
     }
 }
