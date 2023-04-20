@@ -46,6 +46,7 @@ namespace BulkyWeb.Controllers
                 //Add and save to db
                 _dbContext.Categories.Add(category);
                 _dbContext.SaveChanges();
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
 
@@ -76,9 +77,46 @@ namespace BulkyWeb.Controllers
                 //Auto updates the fields based on the id of the category parameter
                 _dbContext.Update(category);
                 _dbContext.SaveChanges();
+                TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
-                return View();
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _dbContext.Categories.FirstOrDefault(i => i.Id == id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+        /*
+         I can change the method signature and pass in only the id.
+        That will change like: [HttpPost,ActionName("Delete")] because there is already a method with the same signature.
+        Explicitly tell the action name to be delete when posting the form
+         */
+        [HttpPost]
+        public IActionResult Delete(Category category)
+        {
+            Category? categoryFromDb = _dbContext.Categories.Find(category.Id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            _dbContext.Remove(categoryFromDb);
+            _dbContext.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index");
         }
     }
 }

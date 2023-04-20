@@ -3,7 +3,7 @@
 <form method="post">
     <div class="border mt-3 p-3">
         <div class="row p-2">
-            <h2 class="text-secondary">Edit Category</h2>
+            <h2 class="text-secondary">Delete Category</h2>
         </div>
         <div class="row mb-3">
             @*not needed if the name of the model is the same as Id otherwise it is a must*@
@@ -11,16 +11,14 @@
 
             @*finds type="text" base on category and also the name for the label*@
             <label asp-for="Name" class="p-0"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" disabled/>
 
             <label asp-for="DisplayOrder" class="p-0"></label>
-            <input asp-for="DisplayOrder" class="form-control" />
-            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+            <input asp-for="DisplayOrder" class="form-control" disabled/>
         </div>
         <div class="row text-center">
             <div class="col-6 ">
-                <button class="btn btn-primary form-control" type="submit">Update</button>
+                <button class="btn btn-primary form-control" type="submit">Delete</button>
             </div>
             <div class="col-6 ">
                 <a asp-controller="Category" asp-action="Index" class="btn btn-secondary form-control">Back to list</a>
@@ -28,10 +26,3 @@
         </div>
     </div>
 </form>
-
-@*By adding this the model validation do not go to server side*@
-@section Scripts{
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-}
