@@ -11,7 +11,7 @@ namespace Bulky.DataAccess.Repository
         public readonly ApplicationDbContext _dbContext;
         internal DbSet<T> _dbSet;
 
-        public Repository(ApplicationDbContext? dbContext)
+        public Repository(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
             this._dbSet = _dbContext.Set<T>();

@@ -8,16 +8,11 @@ namespace Bulky.DataAccess.Repository
 {
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
-        private ApplicationDbContext _dbContext;
+        private new ApplicationDbContext _dbContext;
 
         public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
         }
 
         public void Update(Category category)
