@@ -9,10 +9,10 @@ namespace Bulky.DataAccess.Repository.IRepository
         /* this repository will try to have all the operations that we will need when performing CRUD on Category */
 
         //get all categories
-        IEnumerable<T> GetCategories();
+        IEnumerable<T> GetAll();
 
         //get one category
-        T Get(Expression<Func<T, bool>> filter);
+        T? Get(Expression<Func<T, bool>> filter);
 
         //add category
         void Add(T entity);

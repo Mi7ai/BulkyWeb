@@ -1,0 +1,66 @@
+﻿@model Product
+<div class="card shadow border-0 mt-4>">
+    <div id="bg-gradient1" class="card-header ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-secondary py-2">Create Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border mt-3 p-3">
+                <div class="row mb-3">
+                    @*finds type="text" base on category and also the name for the label*@
+                    <label asp-for="Title" class="p-0"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+
+                    <label asp-for="Description" class="p-0"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+
+                    <label asp-for="ISBN" class="p-0"></label>
+                    <input asp-for="ISBN" class="form-control" />
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+
+                    <label asp-for="Author" class="p-0"></label>
+                    <input asp-for="Author" class="form-control" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+
+                    <label asp-for="Price" class="p-0"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                    <label asp-for="Price1to50" class="p-0"></label>
+                    <input asp-for="Price1to50" class="form-control" />
+                    <span asp-validation-for="Price1to50" class="text-danger"></span>
+
+                    <label asp-for="Price50" class="p-0"></label>
+                    <input asp-for="Price50" class="form-control" />
+                    <span asp-validation-for="Price50" class="text-danger"></span>
+
+                    <label asp-for="Price100" class="p-0"></label>
+                    <input asp-for="Price100" class="form-control" />
+                    <span asp-validation-for="Price100" class="text-danger"></span>
+                </div>
+                <div class="row text-center">
+                    <div class="col-6 ">
+                        <button class="btn btn-primary form-control" type="submit">Create</button>
+                    </div>
+                    <div class="col-6 ">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary form-control">Back to list</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    
+
+@*By adding this the model validation do not go to server side*@
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

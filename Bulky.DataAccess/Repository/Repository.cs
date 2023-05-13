@@ -32,17 +32,17 @@ namespace Bulky.DataAccess.Repository
             _dbSet.RemoveRange(entities);
         }
 
-        public IEnumerable<T> GetCategories()
+        public IEnumerable<T> GetAll()
         {
             IQueryable<T> query = _dbSet;
             return query.ToList();
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T? Get(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = _dbSet;
             query = query.Where(filter);
-            return query.FirstOrDefault();
+            return query?.FirstOrDefault();
         }
     }
 }

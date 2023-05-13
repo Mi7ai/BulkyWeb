@@ -43,6 +43,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Areas\Admin\Views\Category\" />
     <Folder Include="Areas\Customer\Views\Home\" />
+    <Folder Include="Areas\Admin\Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bulky.DataAccess\Bulky.DataAccess.csproj">
@@ -54,5 +55,11 @@
     <ProjectReference Include="..\Bulky.Utility\Bulky.Utility.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Category\Category\Create.cshtml" />
+    <Content Remove="Areas\Admin\Views\Category\Category\Delete.cshtml" />
+    <Content Remove="Areas\Admin\Views\Category\Category\Edit.cshtml" />
+    <Content Remove="Areas\Admin\Views\Category\Category\Index.cshtml" />
   </ItemGroup>
 </Project>

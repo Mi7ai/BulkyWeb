@@ -2,31 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Bulky.Data;
+using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Bulky.DataAccess.Repository.IRepository;
-
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            if (_unitOfWork.Category != null)
+            if (_unitOfWork.Product != null)
             {
-                List<Category> categories = _unitOfWork.Category.GetAll().ToList();
-                return View(categories);
+                List<Product> products = _unitOfWork.Product.GetAll().ToList();
+                return View(products);
             }
 
             return NotFound();
@@ -34,25 +31,19 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public IActionResult Create(Product product)
         {
-
-            //Custom Validation
-            if (category.Name != null && category.Name.Equals(category.DisplayOrder.ToString(), StringComparison.Ordinal))
-            {
-                ModelState.AddModelError("name", "The Category name must be different from Display order");
-            }
-
             if (ModelState.IsValid)
             {
                 //Add and save to db
-                _unitOfWork.Category.Add(category);
+                _unitOfWork.Product.Add(product);
                 _unitOfWork.Save();
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
 
@@ -66,22 +57,23 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Category categoryFromDb = _unitOfWork.Category.Get(i => i.Id == id);
+            Product? productFromDb = _unitOfWork.Product.Get(i => i.Id == id);
 
-            if (categoryFromDb == null)
+            if (productFromDb == null)
             {
                 return NotFound();
             }
-            return View(categoryFromDb);
+
+            return View(productFromDb);
         }
 
         [HttpPost]
-        public IActionResult Edit(Category category)
+        public IActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
                 //Auto updates the fields based on the id of the category parameter
-                _unitOfWork.Category.Update(category);
+                _unitOfWork.Product.Update(product);
                 _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
@@ -96,13 +88,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _unitOfWork.Category.Get(i => i.Id == id);
+            Product? productFromDb = _unitOfWork.Product.Get(i => i.Id == id);
 
-            if (categoryFromDb == null)
+            if (productFromDb == null)
             {
                 return NotFound();
             }
-            return View(categoryFromDb);
+
+            return View(productFromDb);
         }
 
         /*
@@ -111,15 +104,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
         Explicitly tell the action name to be delete when posting the form
          */
         [HttpPost]
-        public IActionResult Delete(Category category)
+        public IActionResult Delete(Product product)
         {
-            Category? categoryFromDb = _unitOfWork.Category.Get(i => i.Id == category.Id);
-
-            if (categoryFromDb == null)
+            Product? productFromDb = _unitOfWork.Product.Get(i => i.Id == product.Id);
+            if (productFromDb == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Category.Remove(categoryFromDb);
+            _unitOfWork.Product.Remove(productFromDb);
             _unitOfWork.Save();
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
