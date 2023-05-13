@@ -39,7 +39,8 @@ namespace Bulky.Data
                 Price = 99,
                 Price1to50 = 90,
                 Price50 = 85,
-                Price100 = 80
+                Price100 = 80,
+                CategoryId = 1
             },
                 new Product
                 {
@@ -51,7 +52,8 @@ namespace Bulky.Data
                     Price = 99,
                     Price1to50 = 30,
                     Price50 = 25,
-                    Price100 = 20
+                    Price100 = 20,
+                    CategoryId = 2
                 },
                 new Product
                 {
@@ -63,7 +65,8 @@ namespace Bulky.Data
                     Price = 55,
                     Price1to50 = 50,
                     Price50 = 40,
-                    Price100 = 35
+                    Price100 = 35,
+                    CategoryId = 3
                 },
                 new Product
                 {
@@ -75,7 +78,8 @@ namespace Bulky.Data
                     Price = 70,
                     Price1to50 = 65,
                     Price50 = 60,
-                    Price100 = 55
+                    Price100 = 55,
+                    CategoryId = 4
                 },
                 new Product
                 {
@@ -87,7 +91,8 @@ namespace Bulky.Data
                     Price = 30,
                     Price1to50 = 27,
                     Price50 = 25,
-                    Price100 = 20
+                    Price100 = 20,
+                    CategoryId = 5
                 },
                 new Product
                 {
@@ -99,7 +104,8 @@ namespace Bulky.Data
                     Price = 25,
                     Price1to50 = 23,
                     Price50 = 22,
-                    Price100 = 20
+                    Price100 = 20,
+                    CategoryId = 6
                 });
         }
     }

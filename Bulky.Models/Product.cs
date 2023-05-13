@@ -44,6 +44,12 @@ namespace Bulky.Models
         [Range(1, 1000, ErrorMessage = "Value must be between 1 - 1000")]
         public double Price100 { get; set; }
 
+        //this is the FK to the Category Table
+        public int CategoryId { get; set; }
+
+        //define the link to the Category Table
+        [ForeignKey("CategoryId")]
+        public Category? Category { get; set; }
     }
 }
 
