@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
@@ -23,6 +24,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             if (_unitOfWork.Product != null)
             {
                 List<Product> products = _unitOfWork.Product.GetAll().ToList();
+                
                 return View(products);
             }
 
@@ -31,7 +33,15 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            //a list of categories for a dropdown
+            IEnumerable<SelectListItem> categoryList = _unitOfWork.Category.GetAll()
+                .Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
 
+            ViewBag.CategoryList = categoryList;
             return View();
         }
 

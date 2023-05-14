@@ -50,6 +50,10 @@ namespace Bulky.Models
         //define the link to the Category Table
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
+
+        public string ImageUrl { get; set; }
+
+
     }
 }
 
