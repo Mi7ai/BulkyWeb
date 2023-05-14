@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
+using Bulky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -24,7 +25,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             if (_unitOfWork.Product != null)
             {
                 List<Product> products = _unitOfWork.Product.GetAll().ToList();
-                
+
                 return View(products);
             }
 
@@ -33,31 +34,32 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            //a list of categories for a dropdown
-            IEnumerable<SelectListItem> categoryList = _unitOfWork.Category.GetAll()
-                .Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
-
-            ViewBag.CategoryList = categoryList;
-            return View();
+            ProductViewModel productVM = new()
+            {
+                //a list of categories for a dropdown
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() }),
+                Product = new Product()
+            };
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
                 //Add and save to db
-                _unitOfWork.Product.Add(product);
+                _unitOfWork.Product.Add(productViewModel.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
-
-            return View();
+            else
+            {
+                //a list of categories for a dropdown for when realoding the page, otherwise it gives an error because it cannot find CategoryList values
+                productViewModel.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
+                return View(productViewModel);
+            }
         }
 
         public IActionResult Edit(int? id)

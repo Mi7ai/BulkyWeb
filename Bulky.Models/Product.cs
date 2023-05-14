@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Bulky.Models
 {
@@ -48,10 +49,14 @@ namespace Bulky.Models
         public int CategoryId { get; set; }
 
         //define the link to the Category Table
+        [ValidateNever]
+        //[ValidateNever] bypasses validation for ModelState on the controller if field does not meet requierements after posting form i.e create  
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
 
-        public string ImageUrl { get; set; }
+        [ValidateNever]
+        //[ValidateNever] bypasses validation for ModelState on the controller if field does not meet requierements after posting form i.e create
+        public string? ImageUrl { get; set; }
 
 
     }
