@@ -33,12 +33,13 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                  <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
-                                </li><li>
-                                  <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
-                               
+
                             </ul>
                         </li>
                     </ul>
@@ -56,12 +57,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container text-center">
-            <i class="bi bi-virus2"></i> an Umbrella Corporation Entity  
+            <i class="bi bi-virus2"></i> an Umbrella Corporation Entity
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.tiny.cloud/1/2x7srjpsy0s4b8k9sauyp6ly3m37ohwbgswfq5kjvnaokxfg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -28,7 +28,6 @@
     <None Remove="Areas\Customer\" />
     <None Remove="Areas\Customer\Controllers\" />
     <None Remove="Areas\Customer\Views\" />
-    <None Remove="Controllers\" />
     <None Remove="Areas\Admin\Views\Category\" />
     <None Remove="Areas\Customer\Views\Home\" />
   </ItemGroup>
@@ -40,10 +39,11 @@
     <Folder Include="Areas\Customer\" />
     <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Views\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Areas\Admin\Views\Category\" />
     <Folder Include="Areas\Customer\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Category\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bulky.DataAccess\Bulky.DataAccess.csproj">
@@ -61,5 +61,7 @@
     <Content Remove="Areas\Admin\Views\Category\Category\Delete.cshtml" />
     <Content Remove="Areas\Admin\Views\Category\Category\Edit.cshtml" />
     <Content Remove="Areas\Admin\Views\Category\Category\Index.cshtml" />
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\images\product\" />
   </ItemGroup>
 </Project>

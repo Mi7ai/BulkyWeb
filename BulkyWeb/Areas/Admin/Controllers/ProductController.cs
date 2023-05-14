@@ -14,10 +14,13 @@ namespace BulkyWeb.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        //for saving the urlImage to folder
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -44,10 +47,25 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductViewModel productViewModel)
+        public IActionResult Create(ProductViewModel productViewModel, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    //generate random file name
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string filePathToSave = Path.Combine(wwwRootPath, @"images/product");
+                    using (var fileStream = new FileStream(Path.Combine(filePathToSave,fileName),FileMode.Create))
+                    {
+                        //saves the file to the path
+                        file.CopyTo(fileStream);
+                    }
+
+                    //save the file url to the Product imageUrl attribute too
+                    productViewModel.Product.ImageUrl = Path.Combine(@"\images\product",fileName);
+                }
                 //Add and save to db
                 _unitOfWork.Product.Add(productViewModel.Product);
                 _unitOfWork.Save();
